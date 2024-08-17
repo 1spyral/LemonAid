@@ -303,7 +303,7 @@ class Server:
             lambda x: self.data["items"][x]["expiry"],
             lambda x: self.data["items"][x]["name"],
         ]
-        items = sorted(self.data["items"], key=methods[sort_method // 2], reverse=sort_method % 2 == 1)
+        items = list(sorted(self.data["items"], key=methods[sort_method // 2], reverse=sort_method % 2 == 1))
 
         # Get data
         response = {
