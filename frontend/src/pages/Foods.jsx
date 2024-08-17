@@ -28,19 +28,24 @@ const currentSorting = "Expiry Date (Earliest)";
 function Foods() {
     const navigate = useNavigate(); 
     
-    const [item, setItems] = useState([])
+    const [items, setItems] = useState([])
 
     useEffect(()=>{
         fetch("http://127.0.0.1:5000/api/view_all_items", {
             method: "GET", 
         }).then((raw)=>{
-            console.log(raw)
-            return raw.json()
+            console.log(raw);
+            return raw.json();
         }).then((value)=>{
-            console.log(value["items"])
-            setItems(value["items"])
-            console.log(value); 
-        }), []
+            const itemsArray = Object.values(value["items"]); 
+            console.log(itemsArray);
+            setItems(itemsArray);
+            //console.log(value["items"]);
+            //setItems(value["items"]);
+            //console.log(value); 
+        }).catch((error)=>{
+            console.error("Fetch error: ", error);
+        });
     }, []); 
 
     //items-center
@@ -63,7 +68,7 @@ function Foods() {
                         <div className="bg-off-white w-full flex justify-center items-center rounded-lg">
                             <table className="w-full my-2 border-yellow-orange border-separate divide-solid divide-y-8">
                                 <tbody className="max-h-[300px] overflow-y-auto divide-y-8 divide-yellow-orange divide-solid">
-                                    {item.map((val, key) => {
+                                    {items.map((val, key) => {
                                         return (
                                             <div className='border-y-20 border-yellow-orange rounded-md mx-0'>
                                                 <tr key={key} className="bg-off-white">

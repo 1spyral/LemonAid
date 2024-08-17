@@ -95,6 +95,7 @@ class Server:
             "status": "success"
         }
         """
+        image = image.replace("data:image/jpeg;base64,", "")
         # Process image
         #if image.filename.split(".")[-1] not in VALID_FILE_TYPES:
         #    return format_response({"status": "error", "message": "Invalid file type"}, 400)
