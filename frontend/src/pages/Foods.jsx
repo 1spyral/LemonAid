@@ -40,9 +40,6 @@ function Foods() {
             const itemsArray = Object.values(value["items"]); 
             console.log(itemsArray);
             setItems(itemsArray);
-            //console.log(value["items"]);
-            //setItems(value["items"]);
-            //console.log(value); 
         }).catch((error)=>{
             console.error("Fetch error: ", error);
         });
@@ -70,12 +67,11 @@ function Foods() {
                                 <tbody className="max-h-[300px] overflow-y-auto divide-y-8 divide-yellow-orange divide-solid">
                                     {items.map((val, key) => {
                                         return (
-                                            <div className='border-y-20 border-yellow-orange rounded-md mx-0'>
-                                                <tr key={key} className="bg-off-white">
-                                                    <td className="px-4 py-2 text-left">{val.name}</td>
-                                                    <td className="px-4 py-2 text-right">{val.expiry}</td>
-                                                </tr>
-                                            </div>
+                                            <tr key={key} className="bg-off-white">
+                                                <td className="px-4 py-2 text-left">{val.name}</td>
+                                                <td className="px-4 py-2 text-right">{val.expiry}</td>
+                                                <td className="px-4 text-right text-chocolate-cosmos">delete</td>
+                                            </tr>
                                         );
                                     })}
                                 </tbody>
