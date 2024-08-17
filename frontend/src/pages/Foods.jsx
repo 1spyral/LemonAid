@@ -31,20 +31,20 @@ function Foods() {
     const [items, setItems] = useState([])
 
     useEffect(()=>{
-        console.log("running")
         fetch("http://127.0.0.1:5000/api/view_all_items", {
             method: "GET", 
         }).then((raw)=>{
-            if(!raw.ok){
-                console.log("error")
-            }else{
-            console.log(raw)
-            }
-            return raw.json()
+            console.log(raw);
+            return raw.json();
         }).then((value)=>{
-            console.log(value["items"])
-            setItems(value["items"])
-            console.log(value); 
+            const itemsArray = Object.values(value["items"]); 
+            console.log(itemsArray);
+            setItems(itemsArray);
+            //console.log(value["items"]);
+            //setItems(value["items"]);
+            //console.log(value); 
+        }).catch((error)=>{
+            console.error("Fetch error: ", error);
         });
     }, []); 
 
