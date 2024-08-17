@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import FoodList from './../components/FoodList';
 import AddInventoryButton from './../components/AddInventoryButton';
-import RecipeList from './../components/RecipeList';
+import RecipeList from '../components/RecipeList';
 
 function Home() {
     return (
