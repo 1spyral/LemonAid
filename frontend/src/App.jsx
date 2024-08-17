@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path = "/" element={<Home />} />
         <Route path = "/food-inventory" element={<Foods />}/>
+        <Route path = "/scan-foods" element={<Camera />}/>
       </Routes>
     </Router>
   )
