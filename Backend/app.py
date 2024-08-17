@@ -144,3 +144,35 @@ def view_all_items():
     """
     return server.view_all_items()
 
+
+@app.route("/api/get_recipes", methods=["GET"])
+def get_recipes():
+    """
+    Generate a number of recipes using food in the pantry
+
+    Request:
+    {
+        "count": 10 - number of recipes to return
+    } 
+    Response:
+    {
+        "recipes":
+        [
+            {
+                "name": "ramen",
+                "ingredients":
+                {
+                    "apple": "one piece"
+                },
+                "instructions": 
+                [
+                    "1. Peel the skin off the apple
+                ]
+            }
+        ]
+        "status": "success"
+    }
+    """
+    count = request.args.get("count")
+
+    return server.generate_recipes(count)

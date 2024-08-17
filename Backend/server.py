@@ -42,9 +42,6 @@ class Server:
             self.setup()
         # Start update loop
         Thread(target=self.update_loop).start()
-
-        self.delete_item("4")
-        self.upload_item(b64_encode_file("imgs/apple.jpg"), "", "")
         
         
     def setup(self) -> None:
@@ -68,6 +65,14 @@ class Server:
         while True:
             sleep(30)
             self.write_data()
+
+    def due_items(self, count) -> list:
+        sorted_keys = sorted(self.data["items"], lambda x: self.data["items"][x]["expiry"])
+        items = []
+        for key in range(min(len(sorted_keys), count)):
+            items.append(self.data["items"][key])
+        return items
+
 
     def upload_item(self, image: str, name: str, expiry: str):
         """
@@ -210,14 +215,11 @@ class Server:
         }
         """
         # Get data
-        sorted_keys = sorted(self.data["items"], lambda x: self.data["items"][x]["expiry"])
+        
         response = {
-            "items": [],
+            "items": self.due_items(count),
             "status": "success"
         }
-        for key in range(min(len(sorted_keys), count)):
-            response["items"].append(self.data["items"][key])
-
         # Return response
         return format_response(response, 200)
 
@@ -257,7 +259,6 @@ class Server:
             response["recipes"].append(generate_recipe(pantry))
         
         return format_response(response, 200)
-
 
 
     def view_all_items(self):
