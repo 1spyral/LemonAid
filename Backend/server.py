@@ -189,8 +189,16 @@ class Server:
         }
         """
         # Get data
+        sorted_keys = sorted(self.data["items"], lambda x: self.data["items"][x]["expiry"])
+        response = {
+            "items": [],
+            "status": "success"
+        }
+        for key in range(min(len(sorted_keys), count)):
+            response["items"].append(self.data["items"][key])
+
         # Return response
-        pass
+        return format_response(response, 200)
 
 #todo
     def view_all_items(self):
