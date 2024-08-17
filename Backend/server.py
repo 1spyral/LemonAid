@@ -1,6 +1,7 @@
 from flask import jsonify
+from threading import Thread
+from time import sleep
 import json
-import threading
 
 from const import PHOTO_PATH, VALID_FILE_TYPES
 
@@ -16,14 +17,38 @@ class Server:
     def __init__(self) -> None:
         """Read stored data from data.json"""
         with open("data.json", "r") as d:
-            self.data = json.load(d)
+            try:
+                self.data = json.load(d)
+                if "items" not in self.data:
+                    raise json.decoder.JSONDecodeError
+            except json.decoder.JSONDecodeError:
+                print("data.json is empty. Setting up data.json")
+                self.setup()
+        # Start update loop
+        Thread(target=self.update_loop).start()
         
+        
+    def setup(self) -> None:
+        """Set up data.json"""
+        self.data = {
+            "items": {}
+        }
+        print("data.json set up")
+        self.write_data()
 
     
     def write_data(self) -> None:
         """Update data to data.json"""
         with open("data.json", "w") as d:
             json.dump(self.data, d)
+        print("data.json updated")
+
+
+    def update_loop(self) -> None:
+        """Update data every 30 seconds"""
+        while True:
+            sleep(30)
+            self.write_data()
 
 #todo
     def upload_item(self, image, name: str, expiry: str):
@@ -125,3 +150,30 @@ class Server:
         # Get data
         # Return response
         pass
+
+#todo
+    def view_all_items(self):
+        """
+        View basic information about all items.
+
+        Request:
+        {}
+        Response:
+        {
+            "items": [
+                {
+                    "id": "123456",
+                    "name": "vanilla ice cream",
+                    "expiry": "2023-12-31"
+                },
+                {
+                    "id": "123457",
+                    "name": "chocolate ice cream",
+                    "expiry": "2023-12-31"
+                }
+            ],
+            "status": "success"
+        }
+        """
+        # Get data
+        # Return response

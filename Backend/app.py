@@ -111,6 +111,7 @@ def view_due_items():
 
     return server.view_due_items(count)
 
+
 @app.route("/api/view_all_items", methods=["GET"])
 def view_all_items():
     """
@@ -137,3 +138,4 @@ def view_all_items():
     }
     """
     return server.view_all_items()
+
