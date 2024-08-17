@@ -1,12 +1,14 @@
 import React, { useRef } from "react";
 import Webcam from "react-webcam";
 
-const WebcamComponent = () => {
+const WebcamComponent = ({ onCapture }) => {
   const webcamRef = useRef(null);
 
   const capturePhoto = () => {
     const imageSrc = webcamRef.current.getScreenshot();
-    console.log(imageSrc); 
+    if (onCapture) {
+        onCapture(imageSrc);
+    } 
   };
 
   return (
