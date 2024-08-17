@@ -58,7 +58,6 @@ class Server:
             sleep(30)
             self.write_data()
 
-#todo
     def upload_item(self, image, name: str, expiry: str):
         """
         Upload food item image or text description to the server.
@@ -120,7 +119,6 @@ class Server:
         response["status"] = "success"
         return format_response(response, 200)
 
-#todo
     def view_item(self, id: str):
         """
         View information about a food item.
@@ -131,16 +129,20 @@ class Server:
         }
         Response:
         {
-            "id": "123456",
-            "name": "vanilla ice cream",
-            "expiry": "2023-12-31",
-            "image": png, jpg or jpeg image,
-            "status": "success"
+            item: {
+                "id": "123456",
+                "name": "vanilla ice cream",
+                "expiry": "2023-12-31",
+                "image": png, jpg or jpeg image,
+                "status": "success"
+            },
+            status: "success"
         }
         """
         # Get data
-        # Return response
-        pass
+        if id not in self.data:
+            return format_response({"status": "error", "message": "Item not found"}, 404)
+        return format_response({"item": self.data["items"][id], "status": "success"}, 200)
     
     def delete_item(self, id: str):
         """
@@ -157,10 +159,10 @@ class Server:
         }
         """
         # Delete data
-        if id in self.data:
-            del self.data[id]
-            return format_response({"id": id, "status": "success"}, 200)
-        return format_response({"status": "error", "message": "Item not found"}, 404)
+        if id not in self.data["items"]:
+            return format_response({"status": "error", "message": "Item not found"}, 404)
+        del self.data["items"][id]
+        return format_response({"id": id, "status": "success"}, 200)
 
 #todo
     def view_due_items(self, count: int):
@@ -200,7 +202,6 @@ class Server:
         # Return response
         return format_response(response, 200)
 
-#todo
     def view_all_items(self):
         """
         View basic information about all items.
