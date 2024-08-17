@@ -263,12 +263,19 @@ class Server:
         return format_response(response, 200)
 
 
-    def view_all_items(self):
+    def view_all_items(self, sort_method: int):
         """
         View basic information about all items.
 
         Request:
-        {}
+        {
+            sort_method: int
+
+            0: sort by expiration (soonest first)
+            1: sort by expiration (latest first)
+            2: sort by name (alphabetical)
+            3: sort by name (reverse alphabetical)
+        }
         Response:
         {
             "items": [
@@ -286,9 +293,15 @@ class Server:
             "status": "success"
         }
         """
+        methods = [
+            lambda x: self.data["items"][x]["expiry"],
+            lambda x: self.data["items"][x]["name"],
+        ]
+        items = sorted(self.data["items"], key=methods[sort_method // 2], reverse=sort_method % 2 == 1)
+
         # Get data
         response = {
-            "items": self.data["items"],
+            "items": items,
             "status": "success"
         }
         return format_response(response, 200)

@@ -124,6 +124,12 @@ def view_all_items():
 
     Request:
     {
+        sort_method: int
+
+        0: sort by expiration (soonest first)
+        1: sort by expiration (latest first)
+        2: sort by name (alphabetical)
+        3: sort by name (reverse alphabetical)
     }
     Response:
     {
@@ -142,11 +148,14 @@ def view_all_items():
         "status": "success"
     }
     """
-    return server.view_all_items()
+    sort_method = request.args.get("sort_method")
+
+    return server.view_all_items(sort_method)
 
 
 @app.route("/api/get_recipes", methods=["GET"])
 def get_recipes():
+
     """
     Generate a number of recipes using food in the pantry
 
