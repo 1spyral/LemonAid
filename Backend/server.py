@@ -42,9 +42,6 @@ class Server:
             self.setup()
         # Start update loop
         Thread(target=self.update_loop).start()
-
-        self.delete_item("4")
-        self.upload_item(b64_encode_file("imgs/apple.jpg"), "", "")
         
         
     def setup(self) -> None:
