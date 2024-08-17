@@ -2,13 +2,14 @@ import { Component } from 'react';
 import FoodList from './../components/FoodList';
 import AddInventoryButton from './../components/AddInventoryButton';
 import RecipeList from '../components/RecipeList';
+import Header from "./Header"; 
 
 function Home() {
     return (
         <>
-            <header className="flex bg-bittersweet w-screen h-20 items-center justify-center text-3xl">
-                <h1>Food Thingy Website</h1>
-            </header>
+            
+            <Header />
+            
             <div className="flex w-4/5 m-auto justify-around">
                 <div className="bg-saffron w-2/5 h-4/5 p-4 m-8 rounded-xl text-xl">
                     <FoodList />

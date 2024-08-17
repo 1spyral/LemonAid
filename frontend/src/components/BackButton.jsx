@@ -7,7 +7,7 @@ const BackButton = () => {
 
     return (
         <button onClick={() => navigate('/')}>
-            <img src = "frontend/src/assets/back button.png" width={50} height={50}/>
+            <img src = "..src/assets/back button.png" width={50} height={50}/>
         </button>
     );
 }

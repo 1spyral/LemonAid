@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import FoodListItem from './FoodListItem';
+import { useNavigate } from 'react-router-dom';
+
 
 const FoodList = () => {
   const [items, setItems] = useState([
@@ -18,11 +20,15 @@ const FoodList = () => {
     { id: 13, leftText: 'Carrot', rightText: 'Expiration' }
   ]);
 
+  const navigate = useNavigate();
+
   return (
     <>
+    <button onClick={() => navigate('../food-inventory')}>
         <h1 className="flex w-auto h-auto m-3 p-2 text-2xl">
             Expiring Soon
         </h1>
+        </button>
         <ul className="list-none">
         {items.map((item) => (
             <FoodListItem
