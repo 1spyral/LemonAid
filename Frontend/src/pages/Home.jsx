@@ -2,9 +2,9 @@ import { Component } from 'react';
 
 function Home() {
     return (
-        <h1>
-            Why doesn't this work grr
-        </h1>
+        <div className="text-gray-200">
+            <h1 className="text-green-600">Food Thingy Website</h1>
+        </div>
     );
 }
 
