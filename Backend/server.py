@@ -259,7 +259,6 @@ class Server:
 
 
 
-#todo
     def view_all_items(self):
         """
         View basic information about all items.
@@ -284,5 +283,8 @@ class Server:
         }
         """
         # Get data
-        # Return response
-        pass
+        response = {
+            "items": self.data["items"],
+            "status": "success"
+        }
+        return format_response(response, 200)
