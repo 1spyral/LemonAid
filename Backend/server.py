@@ -16,14 +16,14 @@ def format_response(info: dict, status: int):
 class Server:
     def __init__(self) -> None:
         """Read stored data from data.json"""
-        with open("data.json", "r") as d:
-            try:
+        try:
+            with open("data.json", "r") as d:
                 self.data = json.load(d)
                 if "items" not in self.data:
                     raise json.decoder.JSONDecodeError
-            except json.decoder.JSONDecodeError:
-                print("data.json is empty. Setting up data.json")
-                self.setup()
+        except (json.decoder.JSONDecodeError, FileNotFoundError):
+            print("data.json is empty. Setting up data.json")
+            self.setup()
         # Start update loop
         Thread(target=self.update_loop).start()
         
