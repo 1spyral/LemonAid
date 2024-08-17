@@ -60,22 +60,24 @@ function Foods() {
                         </div>
                     </div>
 
-                    {/* Sort By Section */}
-                    <div className="w-1/4 pl-4">
-                        <div className="bg-off-white rounded-lg shadow p-4">
-                            <h2 className="text-center text-maroon mb-2 font-semibold">Sort By</h2>
-                            <ul className="text-maroon space-y-2 text-sm">
-                                <li className="cursor-pointer hover:underline">Expiry Date (Earliest)</li>
-                                <li className="cursor-pointer hover:underline">Expiry Date (Latest)</li>
-                                <li className="cursor-pointer hover:underline">Name (Ascending)</li>
-                                <li className="cursor-pointer hover:underline">Name (Descending)</li>
-                            </ul>
+                    
+                        {/* Sort By Section */}
+                        <div className="w-1/4 pl-4">
+                            <div className="bg-off-white rounded-lg shadow p-4">
+                                <h2 className="text-center text-maroon mb-2 font-semibold">Sort By</h2>
+                                <ul className="text-maroon space-y-2 text-sm">
+                                    <li className="cursor-pointer hover:underline">Expiry Date (Earliest)</li>
+                                    <li className="cursor-pointer hover:underline">Expiry Date (Latest)</li>
+                                    <li className="cursor-pointer hover:underline">Name (Ascending)</li>
+                                    <li className="cursor-pointer hover:underline">Name (Descending)</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+        
     );
 }
 
