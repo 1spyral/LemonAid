@@ -9,7 +9,9 @@ CORS(app)
 
 server = Server()
 
-app.run()
+
+if __name__ == "__main__":
+    app.run()
 
 
 @app.route("/api/upload_item", methods=["POST"])
