@@ -2,6 +2,14 @@ from flask import jsonify
 
 import json
 
+
+def format_response(info: dict, status: int):
+    response = jsonify(info)
+    response.status_code = status
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
 class Server:
     def __init__(self) -> None:
         """Read stored data from data.json"""
@@ -15,7 +23,7 @@ class Server:
             json.dump(self.data, d)
 
 
-    def upload_item(self, image: str, description: str, expiry: str):
+    def upload_item(self, image, description: str, expiry: str):
         """
         Upload food item image or text description to the server.
 
