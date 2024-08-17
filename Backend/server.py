@@ -87,6 +87,15 @@ class Server:
             "status": "success"
         }
         """
+        image = str(image)
+        image = image.replace("data:image/jpeg;base64,", "")
+        # Save image
+        with open(f"{PHOTO_PATH}pic.png", "wb") as f:
+            f.write(decodebytes(str.encode(image)))
+
+        print(image[:30])
+
+
         # Process image
         #if image.filename.split(".")[-1] not in VALID_FILE_TYPES:
         #    return format_response({"status": "error", "message": "Invalid file type"}, 400)

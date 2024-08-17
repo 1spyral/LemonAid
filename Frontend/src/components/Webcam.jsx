@@ -5,10 +5,22 @@ const WebcamComponent = ({ onCapture }) => {
   const webcamRef = useRef(null);
 
   const capturePhoto = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
+    const imageSrc = webcamRef.current.getScreenshot({width:1024, height:512});
     if (onCapture) {
         onCapture(imageSrc);
-    } 
+    }
+    console.log(imageSrc);
+    const data = new FormData();
+
+    data.append("image", imageSrc);
+    data.append("name", "");
+    data.append("expiry", "");
+    fetch('http://127.0.0.1:5000/api/upload_item', {
+        method: "POST",
+        body: data,
+    }).then((response) => {
+        console.log(response);
+    })
   };
 
   return (
