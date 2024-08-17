@@ -1,5 +1,6 @@
 VALID_FILE_TYPES = {'png', 'jpg', 'jpeg'}
 PHOTO_PATH = "imgs/"
+ID_CAP = 999999999
 GPT_MODEL = "gpt-4o"
 GPT_MAX_TOKENS = 300
 GPT_PROMPT = """The current date is August 17, 2024.
