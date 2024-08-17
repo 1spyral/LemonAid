@@ -3,18 +3,37 @@ PHOTO_PATH = "imgs/"
 ID_CAP = 999999999
 GPT_MODEL = "gpt-4o"
 GPT_MAX_TOKENS = 300
-GPT_PROMPT = """The current date is August 17, 2024.
+GPT_SCAN_PROMPT = """
+The current date is [date].
             
-                            Please output the response to these questions in a dictionary object with the following format:
-                            {
-                                name: string
-                                confidence: integer
-                                guessnumberofdays: integer
-                                isdateonimage: yes or no
-                                dateonimage: date (YYYY-MM-DD) or none
-                            }
+Please output the response to these questions in a dictionary object with the following format exactly without markup:
 
-                            What food item is in this image?
-                            How confident is this prediction of the food item? (as a percentage)
-                            In about how many days will this product reach its best before or expiry date?
-                            Is there a best before or expiry date listed on the image? If so, what is it?"""
+{
+    "name": string
+    "confidence": integer
+    "guessnumberofdays": integer
+    "isdateonimage": yes or no
+    "dateonimage": date (YYYY-MM-DD) or none
+}
+
+What food item is in this image?
+How confident is this prediction of the food item? (as a percentage)
+In about how many days will this product reach its best before or expiry date?
+Is there a best before or expiry date listed on the image? If so, what is it?"""
+
+GPT_RECIPE_PROMPT = """
+Please output the response to these questions in a dictionary object with the following format exactly without markup:
+
+{
+    "name": string,
+    "ingredients": {
+        "name": amount -> string
+    },
+    "instructions": list,
+}
+
+Given that my pantry includes [pantry].
+
+What is a clever name of a recipe I can make using some of those ingredients?
+What is the ingredients list of this recipe?
+What are the instructions to make this recipe?"""

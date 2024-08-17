@@ -1,7 +1,7 @@
 from flask import Response
 from threading import Thread
 from time import sleep
-from scanner import scan
+from scanner import scan, generate_recipe
 from datetime import date
 from random import randint
 from const import ID_CAP
@@ -87,7 +87,7 @@ class Server:
         if image.filename.split(".")[-1] not in VALID_FILE_TYPES:
             return format_response({"status": "error", "message": "Invalid file type"}, 400)
         
-        scanned_response = scan(image)
+        scanned_response = scan(image, date.today().__str__())
 
         # Process description
         description = scanned_response["name"]
@@ -172,7 +172,6 @@ class Server:
         del self.data["items"][id]
         return format_response({"id": id, "status": "success"}, 200)
 
-#todo
     def view_due_items(self, count: int):
         """
         View basic information about soon-to-expire items, sorted in whichever will expire first.
@@ -210,6 +209,46 @@ class Server:
         # Return response
         return format_response(response, 200)
 
+    def generate_recipes(self, count: int):
+        """
+        Generate a number of recipes using food in the pantry
+
+        Request:
+        {
+            "count": 10 - number of recipes to return
+        } 
+        Response:
+        {
+            "recipes":
+            [
+                {
+                    "name": "ramen",
+                    "ingredients":
+                    {
+                        "apple": "one piece"
+                    },
+                    "instructions": 
+                    [
+                        "1. Peel the skin off the apple
+                    ]
+                }
+            ]
+            "status": "success"
+        }
+        """
+        response = {
+            "recipes":[],
+            "status": "success"
+        }
+        pantry = list(map(lambda x: self.data["items"][x]["name"], self.data["items"]))
+        for _ in range(count):
+            response["recipes"].append(generate_recipe(pantry))
+        
+        return format_response(response, 200)
+
+
+
+#todo
     def view_all_items(self):
         """
         View basic information about all items.
@@ -235,3 +274,4 @@ class Server:
         """
         # Get data
         # Return response
+        pass

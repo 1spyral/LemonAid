@@ -1,7 +1,8 @@
 from openai import OpenAI
 from secret import API_KEY, ORGANIZATION_ID
 from base64 import b64encode
-from const import GPT_MODEL, GPT_PROMPT, GPT_MAX_TOKENS
+from ast import literal_eval
+from const import GPT_MODEL, GPT_SCAN_PROMPT, GPT_MAX_TOKENS, GPT_RECIPE_PROMPT
 
 '''
 
@@ -34,15 +35,16 @@ client = OpenAI(
 )
 
 
-def scan(self, b64_encoded_file):
-    response = self.client.chat.completions.create(
+def scan(b64_encoded_file, date):
+    prompt = GPT_SCAN_PROMPT.replace("[date]", date)
+    response = client.chat.completions.create(
         model=GPT_MODEL,
         messages=[
             {
                 "role": "user",
                 "content": [
                     {
-                        "type": "text", "text": GPT_PROMPT
+                        "type": "text", "text": prompt
                     },
                     {
                         "type": "image_url",
@@ -56,4 +58,50 @@ def scan(self, b64_encoded_file):
         max_tokens=GPT_MAX_TOKENS,
     )
 
-    return response.choices[0].message.content
+    return literal_eval(response.choices[0].message.content.replace("\n", ""))
+
+
+def generate_recipe(ingredient_list):
+    prompt = GPT_RECIPE_PROMPT.replace("[pantry]", ", ".join(ingredient_list))
+    response = client.chat.completions.create(
+        model=GPT_MODEL,
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text", "text": prompt
+                    },
+                ],
+            }
+        ],
+        max_tokens=GPT_MAX_TOKENS,
+    )
+
+    return literal_eval(response.choices[0].message.content.replace("\n", ""))
+
+
+''' testing code 
+l = []
+data = {
+    "items": {
+        "4":{
+            "name": "hi",
+            "t": 4
+        },
+        "5":{
+            "name": "bye",
+            "t": 5
+        },
+        "6":{
+            "name": "lo",
+            "t": 6
+        }
+    }
+}
+pantry = list(map(lambda x: data["items"][x]["name"], data["items"]))
+for _ in range(3):
+    l.append(generate_recipe(pantry))
+
+print(l)
+'''
