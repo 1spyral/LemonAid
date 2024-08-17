@@ -23,22 +23,21 @@ class Server:
         with open("data.json", "w") as d:
             json.dump(self.data, d)
 
-
-    def upload_item(self, image, description: str, expiry: str):
+#todo
+    def upload_item(self, image, name: str, expiry: str):
         """
         Upload food item image or text description to the server.
 
         Request:
         {
             "image": png, jpg or jpeg image,
-            "description": "2 liter vanilla ice cream bucket" (optional)
+            "name": "2 liter vanilla ice cream bucket" (optional)
             "expiry": "2023-12-31" (optional)
         }
         Response:
         {
             "id": "123456",
             "name": "vanilla ice cream",
-            "instructions": "store in freezer once opened",
             "expiry": "2023-12-31",
             "status": "success"
         }
@@ -50,5 +49,76 @@ class Server:
         # Process description
         # Process expiry
         # Update data
+        # Return response
+        pass
+
+#todo
+    def view_item(self, id: str):
+        """
+        View information about a food item.
+
+        Request:
+        {
+            "id": "123456"
+        }
+        Response:
+        {
+            "id": "123456",
+            "name": "vanilla ice cream",
+            "expiry": "2023-12-31",
+            "image": png, jpg or jpeg image,
+            "status": "success"
+        }
+        """
+        # Get data
+        # Return response
+        pass
+    
+#todo
+    def delete_item(self, id: str):
+        """
+        Delete a food item from the server.
+
+        Request:
+        {
+            "id": "123456"
+        } 
+        Response:
+        {
+            "id": "123456",
+            "status": "success"
+        }
+        """
+        # Delete data
+        # Return response
+        pass
+
+#todo
+    def view_due_items(self, count: int):
+        """
+        View basic information about soon-to-expire items, sorted in whichever will expire first.
+
+        Request:
+        {
+            "count": 10 - number of items to return
+        }
+        Response:
+        {
+            "items": [
+                {
+                    "id": "123456",
+                    "name": "vanilla ice cream",
+                    "expiry": "2023-12-31"
+                },
+                {
+                    "id": "123457",
+                    "name": "chocolate ice cream",
+                    "expiry": "2023-12-31"
+                }
+            ],
+            "status": "success"
+        }
+        """
+        # Get data
         # Return response
         pass
