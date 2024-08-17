@@ -13,11 +13,11 @@ function Home() {
                 <div className="bg-saffron w-2/5 h-4/5 p-4 m-8 rounded-xl text-xl">
                     <FoodList />
                 </div>
-                <div className="flex w-2/5 h-4/5 p-4 justify-evenly">
-                    <div className="flex bg-raspberry w-2/5 h-4/5 p-20 m-8 rounded-xl text-xl">
+                <div className="w-2/5 h-4/5 p-4">
+                    <div className="flex bg-raspberry h-4/5 m-5 rounded-xl text-xl">
                         <AddInventoryButton />
                     </div>
-                    <div className="flex bg-raspberry w-2/5 h-4/5 p-20 m-8 rounded-xl text-xl">
+                    <div className="flex h-4/5 rounded-xl text-xl">
                         <RecipeList />
                     </div>
                 </div>

@@ -1,6 +1,12 @@
 from flask import jsonify
 from threading import Thread
 from time import sleep
+from scanner import Scanner
+from datetime import date
+from random import randint
+from const import ID_CAP
+
+import time
 import json
 
 from const import PHOTO_PATH, VALID_FILE_TYPES
@@ -26,6 +32,8 @@ class Server:
             self.setup()
         # Start update loop
         Thread(target=self.update_loop).start()
+
+        self.scanner = Scanner()
         
         
     def setup(self) -> None:
@@ -72,12 +80,45 @@ class Server:
         # Process image
         if image.filename.split(".")[-1] not in VALID_FILE_TYPES:
             return format_response({"status": "error", "message": "Invalid file type"}, 400)
+        
+        scanned_response = self.scan(image)
 
         # Process description
+        description = scanned_response["name"]
+        if name != "":
+            description = name
+
         # Process expiry
+        expiry_date = ""
+
+        if expiry != "":
+            expiry_date = expiry
+
+        elif scanned_response["isdateonimage"] == "yes":
+            expiry_date = scanned_response["dateonimage"]
+
+        else:
+            today_in_seconds = time.time()
+            expiry_time_in_seconds = scanned_response["guessnumberofdays"] * 24 * 60 * 60
+            expiry_day_in_seconds = today_in_seconds + expiry_time_in_seconds
+            expiry_date = date.fromtimestamp(expiry_day_in_seconds).__str__()
+
+        # Generate id
+        id = randint(1, ID_CAP)
+        while id in self.data["items"]:
+             id = randint(1, ID_CAP)
+
         # Update data
+        self.data["items"][str(id)] = {
+             "id": str(id),
+             "name": description,
+             "expiry": expiry_date
+        }
+
         # Return response
-        pass
+        response = self.data["items"][str(id)]
+        response["status"] = "success"
+        return format_response(response, 200)
 
 #todo
     def view_item(self, id: str):

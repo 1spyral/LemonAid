@@ -60,5 +60,4 @@ class Scanner:
             max_tokens=GPT_MAX_TOKENS,
         )
 
-        return response.choices[0]
-
+        return response.choices[0].message.content
