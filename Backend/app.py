@@ -49,11 +49,14 @@ def view_item():
     }
     Response:
     {
-        "id": "123456",
-        "name": "vanilla ice cream",
-        "expiry": "2023-12-31",
-        "image": png, jpg or jpeg image,
-        "status": "success"
+        item: {
+            "id": "123456",
+            "name": "vanilla ice cream",
+            "expiry": "2023-12-31",
+            "image": png, jpg or jpeg image,
+            "status": "success"
+        },
+        status: "success"
     }
     """
     id = request.args.get("id")
