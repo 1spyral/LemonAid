@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, make_response, jsonify
 from flask_cors import CORS
 import json
 
@@ -34,11 +34,6 @@ def upload_item():
         "status": "success"
     }
     """
-    image = request.files.get("image")
-    description = request.form.get("description")
-    expiry = request.form.get("expiry")
-
-    return server.upload_item(image, description, expiry)
-
+    
 
 

@@ -1,5 +1,3 @@
-from flask import jsonify
-
 import json
 
 class Server:
@@ -15,7 +13,7 @@ class Server:
             json.dump(self.data, d)
 
 
-    def upload_item(self, image: str, description: str, expiry: str):
+    def upload_item(self, image: str, description: str, expiry: str) -> dict:
         """
         Upload food item image or text description to the server.
 
@@ -29,7 +27,7 @@ class Server:
         {
             "id": "123456",
             "name": "vanilla ice cream",
-            "instructions": "store in freezer once opened",
+            "recommended_location": "freezer",
             "expiry": "2023-12-31",
             "status": "success"
         }
