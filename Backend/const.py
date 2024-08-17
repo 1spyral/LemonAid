@@ -9,6 +9,7 @@ The current date is [date].
 Please output the response to these questions in a dictionary object with the following format exactly without markup:
 
 {
+    "isfooditem": yes or no
     "name": string
     "confidence": integer
     "guessnumberofdays": integer
@@ -16,7 +17,7 @@ Please output the response to these questions in a dictionary object with the fo
     "dateonimage": date (YYYY-MM-DD) or none
 }
 
-What food item is in this image?
+Is there a food item in this image, and if so, what is it?
 How confident is this prediction of the food item? (as a percentage)
 In about how many days will this product reach its best before or expiry date?
 Is there a best before or expiry date listed on the image? If so, what is it?"""
