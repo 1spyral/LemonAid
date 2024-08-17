@@ -100,10 +100,12 @@ class Server:
 
         # Process description
         description = scanned_response["name"]
+
         if name != "":
-            if scanned_response["isfooditem"] == "no":
-                return format_response({"status": "error", "message": "No food item was detected"}, 400)
             description = name
+
+        if name == "" and scanned_response["isfooditem"] == "no":
+            return format_response({"status": "error", "message": "No food item was detected"}, 400)
 
         # Process expiry
         expiry_date = ""
