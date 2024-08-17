@@ -58,7 +58,6 @@ class Server:
             sleep(30)
             self.write_data()
 
-#todo
     def upload_item(self, image, name: str, expiry: str):
         """
         Upload food item image or text description to the server.
@@ -120,7 +119,6 @@ class Server:
         response["status"] = "success"
         return format_response(response, 200)
 
-#todo
     def view_item(self, id: str):
         """
         View information about a food item.
@@ -196,7 +194,6 @@ class Server:
         # Return response
         pass
 
-#todo
     def view_all_items(self):
         """
         View basic information about all items.
