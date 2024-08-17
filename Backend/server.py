@@ -1,5 +1,6 @@
 from flask import jsonify
 import json
+import threading
 
 from const import PHOTO_PATH, VALID_FILE_TYPES
 
@@ -16,6 +17,7 @@ class Server:
         """Read stored data from data.json"""
         with open("data.json", "r") as d:
             self.data = json.load(d)
+        
 
     
     def write_data(self) -> None:
@@ -74,7 +76,6 @@ class Server:
         # Return response
         pass
     
-#todo
     def delete_item(self, id: str):
         """
         Delete a food item from the server.
@@ -90,8 +91,10 @@ class Server:
         }
         """
         # Delete data
-        # Return response
-        pass
+        if id in self.data:
+            del self.data[id]
+            return format_response({"id": id, "status": "success"}, 200)
+        return format_response({"status": "error", "message": "Item not found"}, 404)
 
 #todo
     def view_due_items(self, count: int):
