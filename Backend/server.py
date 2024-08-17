@@ -1,6 +1,7 @@
 from flask import jsonify
-
 import json
+
+from const import PHOTO_PATH, VALID_FILE_TYPES
 
 
 def format_response(info: dict, status: int):
@@ -43,6 +44,9 @@ class Server:
         }
         """
         # Process image
+        if image.filename.split(".")[-1] not in VALID_FILE_TYPES:
+            return format_response({"status": "error", "message": "Invalid file type"}, 400)
+
         # Process description
         # Process expiry
         # Update data

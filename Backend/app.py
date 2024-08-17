@@ -2,8 +2,6 @@ from flask import Flask, request
 from flask_cors import CORS
 import json
 
-from const import *
-
 from server import Server
 
 app = Flask(__name__)
