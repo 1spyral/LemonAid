@@ -1,7 +1,7 @@
 from flask import Response
 from threading import Thread
 from time import sleep
-from scanner import scan, generate_recipe, b64_encode_file
+from scanner import scan, generate_recipe, b64_encode_file, generate_recipe_image
 from base64 import decodebytes
 from datetime import date
 from random import randint
@@ -246,7 +246,8 @@ class Server:
                     "instructions": 
                     [
                         "1. Peel the skin off the apple
-                    ]
+                    ],
+                    "image": "https://blah"
                 }
             ]
             "status": "success"
@@ -258,6 +259,9 @@ class Server:
         }
         pantry = list(map(lambda x: self.data["items"][x]["name"], self.data["items"]))
         for _ in range(count):
+            recipe_generated = generate_recipe(pantry)
+            image_url = generate_recipe_image(recipe_generated)
+            recipe_generated["image"] = image_url
             response["recipes"].append(generate_recipe(pantry))
         
         return format_response(response, 200)

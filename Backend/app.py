@@ -176,7 +176,8 @@ def get_recipes():
                 "instructions": 
                 [
                     "1. Peel the skin off the apple
-                ]
+                ],
+                "image": "https://blah"
             }
         ]
         "status": "success"
