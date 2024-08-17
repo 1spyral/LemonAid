@@ -2,16 +2,20 @@ import React from 'react';
 import WebcamComponent from '../components/Webcam';
 import { useNavigate } from 'react-router-dom';
 
-
 function Camera() {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     return(
-        <div className="flex justify-center bg-hot-pink">
-            <button className = "" onClick={() => navigate('/')}>
-                <img src = "../src/assets/back button.png" width={30} height={30}/>
-            </button>
-            <WebcamComponent />
+        <div>
+            <div className="flex justify-left items-center bg-hot-pink">
+                <button onClick={() => navigate('/')}>
+                    <img src = "../src/assets/back button2.png" width={20} height={20}/>
+                </button>
+            </div>
+            <div className="flex justify-center">
+                <WebcamComponent />
+            </div>
         </div>
+        
     );
 }
 

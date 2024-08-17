@@ -14,9 +14,9 @@ const WebcamComponent = () => {
       <Webcam
         audio={false}
         height={720}
-        width={1080}
+        width={960}
         screenshotFormat="image/jpeg"
-        className="mt-10 mb-5 transform scale-x-[-1] rounded-3xl"
+        className="mt-2 mb-5 transform scale-x-[-1] rounded-3xl"
         ref={webcamRef}
       />
       <button

@@ -1,7 +1,8 @@
 from flask import Response
 from threading import Thread
 from time import sleep
-from scanner import scan, generate_recipe
+from scanner import scan, generate_recipe, b64_encode_file
+from base64 import decodebytes
 from datetime import date
 from random import randint
 from PIL import Image
@@ -68,13 +69,13 @@ class Server:
             sleep(30)
             self.write_data()
 
-    def upload_item(self, image, name: str, expiry: str):
+    def upload_item(self, image: str, name: str, expiry: str):
         """
         Upload food item image or text description to the server.
 
         Request:
         {
-            "image": png, jpg or jpeg image,
+            "image": base64 encoded png, jpg or jpeg image,
             "name": "2 liter vanilla ice cream bucket" (optional)
             "expiry": "2023-12-31" (optional)
         }
@@ -87,14 +88,15 @@ class Server:
         }
         """
         # Process image
-        if image.filename.split(".")[-1] not in VALID_FILE_TYPES:
-            return format_response({"status": "error", "message": "Invalid file type"}, 400)
-        
-        scanned_response = scan(image, date.today().__str__())
+        #if image.filename.split(".")[-1] not in VALID_FILE_TYPES:
+        #    return format_response({"status": "error", "message": "Invalid file type"}, 400)
+        scanned_response = scan(image, str(date.today()))
 
         # Process description
         description = scanned_response["name"]
         if name != "":
+            if scanned_response["isfooditem"] == "no":
+                return format_response({"status": "error", "message": "No food item was detected"}, 400)
             description = name
 
         # Process expiry
@@ -119,7 +121,8 @@ class Server:
 
 
         # Save image
-        image.save(f"{PHOTO_PATH}{id}.png")
+        with open(f"{PHOTO_PATH}{id}.png", "wb") as f:
+            f.write(decodebytes(str.encode(image)))
 
 
         # Update data

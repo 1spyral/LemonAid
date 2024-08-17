@@ -19,7 +19,7 @@ def upload_item():
 
     Request:
     {
-        "image": png, jpg or jpeg image,
+        "image": base64 encoded png, jpg or jpeg image,
         "name": "2 liter vanilla ice cream bucket" (optional)
         "expiry": "2023-12-31" (optional)
     }
@@ -31,7 +31,7 @@ def upload_item():
         "status": "success"
     }
     """
-    image = request.files.get("image")
+    image = request.form.get("image")
     name = request.form.get("name")
     expiry = request.form.get("expiry")
 
