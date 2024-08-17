@@ -37,7 +37,7 @@ function Foods() {
     const changeSorting = (sortingChoice) => {
         setCurrentSorting(sortingChoice); 
 
-        updateFoodsOrder(); 
+        updateFoodsOrder(sortingChoice); 
     };
 
     useEffect(()=>{
@@ -74,8 +74,8 @@ function Foods() {
         });
     };
 
-    const updateFoodsOrder = () => {
-        fetch(`http://127.0.0.1:5000/api/view_all_items?sort_method=${currentSorting}`, {
+    const updateFoodsOrder = (sort_method) => {
+        fetch(`http://127.0.0.1:5000/api/view_all_items?sort_method=${sort_method}`, {
             method: "GET", 
         }).then((raw)=>{
             console.log(raw);
@@ -113,8 +113,11 @@ function Foods() {
                                         return (
                                             <tr key={key} className="bg-off-white">
                                                 <td className="px-4 py-2 text-left">{val.name}</td>
-                                                <td className="px-4 py-2 text-right">{val.expiry}</td>
-                                                <td className="px-4 text-right text-chocolate-cosmos" onClick={ () => singleDelete(val.id) }>delete</td>
+                                                <td className="px-12 py-2 text-right">{val.expiry}</td>
+                                                <td className="px-0 text-right text-chocolate-cosmos" onClick={ () => singleDelete(val.id) }>
+                                                    <img src="../src/assets/trash.png" width={20} height={20} className = "hover:cursor-pointer"/>
+
+                                                </td>
                                             </tr>
                                         );
                                     })}
