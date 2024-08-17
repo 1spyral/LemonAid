@@ -297,6 +297,8 @@ class Server:
             "status": "success"
         }
         """
+        sorted_method = int(sort_method)
+
         methods = [
             lambda x: self.data["items"][x]["expiry"],
             lambda x: self.data["items"][x]["name"],
