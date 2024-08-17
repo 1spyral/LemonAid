@@ -4,6 +4,7 @@ import BackButton from '../components/BackButton';
 import { useNavigate } from 'react-router-dom';
 
 
+
 const data = [
     { name: "carrot", expiry: "2024-08-17" },
     { name: "apple", expiry: "2024-08-20" },
@@ -25,9 +26,10 @@ const data = [
 
 const currentSorting = "Expiry Date (Earliest)";
 
+
 function Foods() {
     const navigate = useNavigate(); 
-    
+
     const [items, setItems] = useState([])
 
     useEffect(()=>{
@@ -46,6 +48,24 @@ function Foods() {
     }, []); 
 
     //items-center
+
+    const singleDelete = (newid) => {
+        fetch(`http://127.0.0.1:5000/api/delete_item?id=${newid}`, {
+            method: "DELETE",
+        })
+        .then((response) => {
+            if (response.ok) {
+                const newArr = items.filter((item) => item.id !== newid);
+                setItems(newArr);
+            } else {
+                console.error("Failed to delete item");
+            }
+        })
+        .catch((error) => {
+            console.error("Fetch error: ", error);
+        });
+    };
+
 
     return (
         <div>
@@ -70,7 +90,7 @@ function Foods() {
                                             <tr key={key} className="bg-off-white">
                                                 <td className="px-4 py-2 text-left">{val.name}</td>
                                                 <td className="px-4 py-2 text-right">{val.expiry}</td>
-                                                <td className="px-4 text-right text-chocolate-cosmos">delete</td>
+                                                <td className="px-4 text-right text-chocolate-cosmos" onClick={ () => singleDelete(val.id) }>delete</td>
                                             </tr>
                                         );
                                     })}
