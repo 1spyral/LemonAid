@@ -303,7 +303,10 @@ class Server:
             lambda x: self.data["items"][x]["expiry"],
             lambda x: self.data["items"][x]["name"],
         ]
-        items = list(sorted(self.data["items"], key=methods[sort_method // 2], reverse=sort_method % 2 == 1))
+        items = []
+
+        for item in sorted(self.data["items"], key=methods[sort_method // 2], reverse=sort_method % 2 == 1):
+            items.append(self.data["items"][item])
 
         # Get data
         response = {
