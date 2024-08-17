@@ -1,7 +1,7 @@
-from flask import jsonify
+from flask import Response
 from threading import Thread
 from time import sleep
-from scanner import Scanner
+from scanner import scan
 from datetime import date
 from random import randint
 from const import ID_CAP
@@ -13,7 +13,11 @@ from const import PHOTO_PATH, VALID_FILE_TYPES
 
 
 def format_response(info: dict, status: int):
-    response = jsonify(info)
+    response = Response(
+        response=json.dumps(info),
+        status=status,
+        mimetype="application/json"
+    )
     response.status_code = status
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
@@ -23,8 +27,11 @@ class Server:
     def __init__(self) -> None:
         """Read stored data from data.json"""
         try:
+            print("Loading data.json")
             with open("data.json", "r") as d:
                 self.data = json.load(d)
+                print("data.json loaded")
+                print(self.data)
                 if "items" not in self.data:
                     raise json.decoder.JSONDecodeError
         except (json.decoder.JSONDecodeError, FileNotFoundError):
@@ -33,7 +40,7 @@ class Server:
         # Start update loop
         Thread(target=self.update_loop).start()
 
-        self.scanner = Scanner()
+        self.delete_item("4")
         
         
     def setup(self) -> None:
@@ -80,7 +87,7 @@ class Server:
         if image.filename.split(".")[-1] not in VALID_FILE_TYPES:
             return format_response({"status": "error", "message": "Invalid file type"}, 400)
         
-        scanned_response = self.scan(image)
+        scanned_response = scan(image)
 
         # Process description
         description = scanned_response["name"]
@@ -160,6 +167,7 @@ class Server:
         """
         # Delete data
         if id not in self.data["items"]:
+            print("Item not found")
             return format_response({"status": "error", "message": "Item not found"}, 404)
         del self.data["items"][id]
         return format_response({"id": id, "status": "success"}, 200)
