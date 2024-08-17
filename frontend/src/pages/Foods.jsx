@@ -36,6 +36,8 @@ function Foods() {
 
     const changeSorting = (sortingChoice) => {
         setCurrentSorting(sortingChoice); 
+
+        updateFoodsOrder(); 
     };
 
     useEffect(()=>{
@@ -71,6 +73,21 @@ function Foods() {
             console.error("Fetch error: ", error);
         });
     };
+
+    const updateFoodsOrder = () => {
+        fetch(`http://127.0.0.1:5000/api/view_all_items?sort_method=${currentSorting}`, {
+            method: "GET", 
+        }).then((raw)=>{
+            console.log(raw);
+            return raw.json();
+        }).then((value)=>{
+            const itemsArray = Object.values(value["items"]); 
+            console.log(itemsArray);
+            setItems(itemsArray);
+        }).catch((error)=>{
+            console.error("Fetch error: ", error);
+        });
+    }
 
 
 
