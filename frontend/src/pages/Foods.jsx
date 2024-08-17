@@ -24,16 +24,22 @@ const data = [
     { name: "pear", expiry: "2024-08-25" },
 ];
 
-const currentSorting = "Expiry Date (Earliest)";
+
+const sortingOptions = ["Expiry Date (Earliest)", "Expiry Date (Latest)", "Name (Ascending)", "Name (Descending)"]
 
 
 function Foods() {
     const navigate = useNavigate(); 
 
     const [items, setItems] = useState([])
+    const [currentSorting, setCurrentSorting] = useState(0);
+
+    const changeSorting = (sortingChoice) => {
+        setCurrentSorting(sortingChoice); 
+    };
 
     useEffect(()=>{
-        fetch("http://127.0.0.1:5000/api/view_all_items", {
+        fetch(`http://127.0.0.1:5000/api/view_all_items?sort_method=${currentSorting}`, {
             method: "GET", 
         }).then((raw)=>{
             console.log(raw);
@@ -67,6 +73,7 @@ function Foods() {
     };
 
 
+
     return (
         <div>
             <Header />
@@ -76,7 +83,7 @@ function Foods() {
                     <button onClick={() => navigate('/')}>
                         <img src = "../src/assets/back button.png" width={30} height={30}/>
                     </button>
-                    <h1 className="text-off-white text-xl font-semibold">{currentSorting}</h1>
+                    <h1 className="text-off-white text-xl font-semibold">{sortingOptions[currentSorting]}</h1>
                 </div>
 
                 <div className="flex">
@@ -105,10 +112,13 @@ function Foods() {
                             <div className="bg-off-white rounded-lg shadow p-4">
                                 <h2 className="text-center text-maroon mb-2 font-semibold">Sort By</h2>
                                 <ul className="text-maroon space-y-2 text-sm">
-                                    <li className="cursor-pointer hover:underline">Expiry Date (Earliest)</li>
-                                    <li className="cursor-pointer hover:underline">Expiry Date (Latest)</li>
-                                    <li className="cursor-pointer hover:underline">Name (Ascending)</li>
-                                    <li className="cursor-pointer hover:underline">Name (Descending)</li>
+                                    {sortingOptions.map((val, key) => {
+                                        return (
+                                            <li key={key} className="bg-off-white">
+                                                <h2 className="px-4 py-2 text-left cursor-pointer hover:underline" onClick={() => changeSorting(key)}>{val}</h2>
+                                            </li>
+                                        );
+                                    })}                                    
                                 </ul>
                             </div>
                         </div>
