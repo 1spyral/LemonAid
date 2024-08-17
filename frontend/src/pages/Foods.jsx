@@ -43,14 +43,16 @@ function Foods() {
                     {/* Table Section */}
                     <div className="w-3/4">
                         <div className="bg-off-white w-full flex justify-center items-center rounded-lg">
-                            <table className="w-full border-spacing-2 border-separate m-2">
-                                <tbody className="max-h-[300px] overflow-y-auto">
+                            <table className="w-full my-2 border-yellow-orange border-separate divide-solid divide-y-8">
+                                <tbody className="max-h-[300px] overflow-y-auto divide-y-8 divide-yellow-orange divide-solid">
                                     {data.map((val, key) => {
                                         return (
-                                            <tr key={key} className="bg-off-white border-yellow-orange-4 rounded-lg shadow mb-4 py-10">
-                                                <td className="px-4 py-2 text-left">{val.foodName}</td>
-                                                <td className="px-4 py-2 text-right">{val.expiryDate}</td>
-                                            </tr>
+                                            <div className='border-y-20 border-yellow-orange rounded-md mx-0'>
+                                                <tr key={key} className="bg-off-white">
+                                                    <td className="px-4 py-2 text-left">{val.foodName}</td>
+                                                    <td className="px-4 py-2 text-right">{val.expiryDate}</td>
+                                                </tr>
+                                            </div>
                                         );
                                     })}
                                 </tbody>
