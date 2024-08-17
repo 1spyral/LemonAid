@@ -38,3 +38,9 @@ Given that my pantry includes [pantry].
 What is a clever name of a recipe I can make using some of those ingredients?
 What is the ingredients list of this recipe?
 What are the instructions to make this recipe?"""
+
+GPT_RECIPE_IMAGE_PROMPT = """
+Please generate an image of the dish based on the name, and ingredients below.
+
+[dict]
+"""
