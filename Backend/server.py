@@ -301,7 +301,7 @@ class Server:
 
         methods = [
             lambda x: self.data["items"][x]["expiry"],
-            lambda x: self.data["items"][x]["name"],
+            lambda x: self.data["items"][x]["name"].lower(),
         ]
         items = []
 
