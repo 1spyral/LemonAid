@@ -9,7 +9,13 @@ export default {
       'saffron': '#FCCA6F',
       'bittersweet': '#FD5D5B',
       'raspberry': '#DD2255',
-      'chocolate-cosmos': '#44000A'
+      'chocolate-cosmos': '#44000A',
+
+      'off-white': '#F9F7F2',
+      'yellow-orange': '#FCCA6F',
+      'salmon': '#FD5D5B', 
+      'hot-pink': '#DD2255', 
+      'maroon': '#44000A',
     },
     extend: {},
   },
