@@ -4,7 +4,9 @@ from time import sleep
 from scanner import scan, generate_recipe
 from datetime import date
 from random import randint
-from const import ID_CAP
+from PIL import Image
+
+from const import ID_CAP, PHOTO_PATH, VALID_FILE_TYPES
 
 import time
 import json
@@ -41,6 +43,7 @@ class Server:
         Thread(target=self.update_loop).start()
 
         self.delete_item("4")
+        self.upload_item(b64_encode_file("imgs/apple.jpg"), "", "")
         
         
     def setup(self) -> None:
@@ -113,6 +116,11 @@ class Server:
         id = randint(1, ID_CAP)
         while id in self.data["items"]:
              id = randint(1, ID_CAP)
+
+
+        # Save image
+        image.save(f"{PHOTO_PATH}{id}.png")
+
 
         # Update data
         self.data["items"][str(id)] = {
