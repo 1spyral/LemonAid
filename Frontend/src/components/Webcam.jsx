@@ -37,8 +37,8 @@ const WebcamComponent = ({ onCapture, onCaptureComplete}) => {
     <div className="items-center relative">
       <Webcam
         audio={false}
-        height={720}
-        width={960}
+        height={504}
+        width={672}
         screenshotFormat="image/jpeg"
         className="mt-2 mb-5 transform scale-x-[-1] rounded-3xl"
         ref={webcamRef}
