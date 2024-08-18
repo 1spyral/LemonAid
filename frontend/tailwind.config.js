@@ -17,7 +17,12 @@ export default {
       'hot-pink': '#DD2255', 
       'maroon': '#44000A',
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        'lilita': ['"Lilita One"', 'sans-serif'],
+        'delius': ['"Delius"', 'cursive'],
+      }
+    }
   },
   plugins: [],
 }

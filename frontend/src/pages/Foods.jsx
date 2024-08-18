@@ -96,11 +96,11 @@ function Foods() {
             <Header />
         <div className="bg-off-white flex justify-center">
             <div className="bg-yellow-orange rounded-lg shadow-lg p-8 w-5/6 my-12">
-                <div className="flex justify-left items-center mb-4">
-                    <button onClick={() => navigate('/')}>
-                        <img src = "../src/assets/back button.png" width={30} height={30} className="mr-10"/>
+                <div className="flex justify-left items-center mb-4 text-xl">
+                    <button onClick={() => navigate('/')} className='font-delius pr-10 hover:text-hot-pink'>
+                        &lt; Back
                     </button>
-                    <h1 className="text-maroon text-2xl font-semibold">{sortingOptions[currentSorting]}</h1>
+                    <h1 className="text-maroon text-2xl font-lilita pl-52">{sortingOptions[currentSorting]}</h1>
                 </div>
 
                 <div className="flex">
@@ -112,8 +112,8 @@ function Foods() {
                                     {items.map((val, key) => {
                                         return (
                                             <tr key={key} className="bg-off-white">
-                                                <td className="px-4 py-2 text-left text-maroon text-lg">{val.name}</td>
-                                                <td className="px-12 py-2 text-right text-maroon text-lg">{val.expiry}</td>
+                                                <td className="px-4 py-2 text-left text-maroon text-lg font-delius">{val.name}</td>
+                                                <td className="px-12 py-2 text-right text-maroon text-lg font-delius">{val.expiry}</td>
                                                 <td className="px-0 text-right" onClick={ () => singleDelete(val.id) }>
                                                     <img src="../src/assets/trash.png" width={20} height={20} className = "hover:cursor-pointer"/>
 
@@ -130,12 +130,12 @@ function Foods() {
                         {/* Sort By Section */}
                         <div className="w-1/4 pl-4">
                             <div className="bg-off-white rounded-lg shadow p-4">
-                                <h2 className="text-center text-maroon mb-2 font-semibold text-xl">Sort By</h2>
+                                <h2 className="text-center text-maroon mb-2 text-2xl font-lilita">Sort By</h2>
                                 <ul className="text-maroon space-y-2 text-sm">
                                     {sortingOptions.map((val, key) => {
                                         return (
                                             <li key={key} className="bg-off-white">
-                                                <h2 className="px-4 py-2 text-left cursor-pointer hover:underline text-lg" onClick={() => changeSorting(key)}>{val}</h2>
+                                                <h2 className="px-4 py-2 text-left cursor-pointer hover:underline text-lg font-delius" onClick={() => changeSorting(key)}>{val}</h2>
                                             </li>
                                         );
                                     })}                                    

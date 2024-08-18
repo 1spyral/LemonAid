@@ -42,7 +42,7 @@ function Recipes() {
                         <div className="flex">
                             <div className="w-1/3 h-3/4 p-10 m-5 rounded-3xl bg-raspberry">
                                 <img src={imageUrl} alt="Image of Food" className="rounded-2xl"/>
-                                <ul className="mt-5 ml-5 list-disc text-2xl text-baby-powder">
+                                <ul className="mt-5 ml-5 list-disc text-2xl text-baby-powder font-delius">
                                     {Object.entries(ingredients).map(([ingredient, quantity], i) => (
                                         <li key={i}>
                                             {ingredient}: {quantity}
@@ -51,8 +51,8 @@ function Recipes() {
                                 </ul>
                             </div>
                             <div className="text-6xl m-12 text-chocolate-cosmos">
-                                <h1>{name}</h1>
-                                <ul className="text-3xl mt-12">
+                                <h1 className="font-lilita">{name}</h1>
+                                <ul className="text-3xl mt-12 font-delius">
                                     {instructions?.map((step) => (
                                         <li className="m-6">{step}</li>
                                     ))}
