@@ -7,9 +7,7 @@ import Header from "./Header";
 function Home() {
     return (
         <>
-            
             <Header />
-            
             <div className="flex w-4/5 m-auto justify-around">
                 <div className="bg-saffron w-2/5 h-4/5 p-4 m-8 rounded-xl text-xl">
                     <FoodList />
@@ -22,9 +20,7 @@ function Home() {
                         <RecipeList />
                     </div>
                 </div>
-                
             </div>
-            
         </>
     );
 }

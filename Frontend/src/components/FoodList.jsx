@@ -1,43 +1,46 @@
-import React, { useState } from 'react';
-import FoodListItem from './FoodListItem';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
 const FoodList = () => {
-  const [items, setItems] = useState([
-    { id: 1, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 2, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 3, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 4, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 5, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 6, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 7, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 8, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 9, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 10, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 11, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 12, leftText: 'Carrot', rightText: 'Expiration' },
-    { id: 13, leftText: 'Carrot', rightText: 'Expiration' }
-  ]);
 
   const navigate = useNavigate();
 
+  const [items, setItems] = useState([]);
+  const currentSorting = "Expiry Date (Earliest)";
+
+  useEffect(()=>{
+    fetch(`http://127.0.0.1:5000/api/view_all_items?sort_method=0`, {
+        method: "GET", 
+    }).then((raw)=>{
+        console.log(raw);
+        return raw.json();
+    }).then((value)=>{
+        const itemsArray = Object.values(value["items"]); 
+        console.log(itemsArray);
+        setItems(itemsArray);
+    }).catch((error)=>{
+        console.error("Fetch error: ", error);
+    });
+  }, []); 
+
   return (
     <>
-    <button onClick={() => navigate('../food-inventory')}>
-        <h1 className="flex w-auto h-auto m-3 p-2 text-2xl">
-            Expiring Soon
-        </h1>
-        </button>
-        <ul className="list-none">
-        {items.map((item) => (
-            <FoodListItem
-            key={item.id}
-            leftText={item.leftText}
-            rightText={item.rightText}
-            />
-        ))}
-        </ul>
+      <button onClick={() => navigate('../food-inventory')}>
+          <h1 className="flex w-auto h-auto m-3 p-2 text-2xl">
+              Expiring Soon
+          </h1>
+      </button>
+      <ul className="overflow-y-auto">
+        {items.slice(0, 10).map((val, key) => {
+          return (
+              <li key={key} className="flex bg-baby-powder justify-between m-2 rounded-lg">
+                  <span className="px-4 py-2 text-left">{val.name}</span>
+                  <span className="px-4 py-2 text-right">{val.expiry}</span>
+              </li>
+          );
+        })}
+      </ul>
     </>
   );
 };
