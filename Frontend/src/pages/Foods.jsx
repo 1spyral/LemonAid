@@ -115,7 +115,7 @@ function Foods() {
                                                 <td className="px-4 py-2 text-left text-maroon text-lg font-delius">{val.name}</td>
                                                 <td className="px-12 py-2 text-right text-maroon text-lg font-delius">{val.expiry}</td>
                                                 <td className="px-0 text-right" onClick={ () => singleDelete(val.id) }>
-                                                    <img src="../src/assets/trash.png" width={20} height={20} className = "hover:cursor-pointer"/>
+                                                    <img src="../src/assets/trash.png" width={20} height={20} onMouseOver={e => (e.currentTarget.src = "../src/assets/trash-lid-open.png")} onMouseOut={e => (e.currentTarget.src = "../src/assets/trash.png")} className = "hover:cursor-pointer"/>
 
                                                 </td>
                                             </tr>

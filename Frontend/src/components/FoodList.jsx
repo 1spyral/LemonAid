@@ -61,7 +61,7 @@ const FoodList = () => {
                   <span className="px-4 py-2 text-left text-maroon font-delius">{val.name}</span>
                   <span className="px-10 py-2 text-right ml-auto text-maroon font-delius">{val.expiry}</span>
                   <div className="px-0 text-right text-chocolate-cosmos" onClick={ () => singleDelete(val.id) }>
-                    <img src="../src/assets/trash.png" width={20} height={20} className = "hover:cursor-pointer mt-3 mr-3"/>
+                  <img src="../src/assets/trash.png" width={20} height={20} onMouseOver={e => (e.currentTarget.src = "../src/assets/trash-lid-open.png")} onMouseOut={e => (e.currentTarget.src = "../src/assets/trash.png") } className = "hover:cursor-pointer mt-3 mr-3 hover:w-5 hover:h-6"/>
                   </div>
 
               </li>
