@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import WebcamComponent from '../components/Webcam';
 import { useNavigate } from 'react-router-dom';
 import { AddFoodAlert } from '../components/AddFoodAlert';
+import Header from './Header'; 
 
 function Camera() {
     const navigate = useNavigate();
@@ -31,12 +32,13 @@ function Camera() {
 
     return(
         <div>
-            <div className="flex justify-left items-center bg-hot-pink">
+            <Header />
+            <div className="flex justify-left items-center ml-10 mt-10">
                 <button onClick={() => navigate('/')}>
                     <img src = "../src/assets/back button2.png" width={20} height={20}/>
                 </button>
             </div>
-            <div className="flex justify-center">
+            <div className="flex relative justify-center z-0">
             <WebcamComponent onCaptureComplete={handleCaptureComplete} />
             {captureStatus && (
                 <div>

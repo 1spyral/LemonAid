@@ -100,7 +100,7 @@ function Foods() {
                     <button onClick={() => navigate('/')}>
                         <img src = "../src/assets/back button.png" width={30} height={30} className="mr-10"/>
                     </button>
-                    <h1 className="text-off-white text-xl font-semibold">{sortingOptions[currentSorting]}</h1>
+                    <h1 className="text-maroon text-2xl font-semibold">{sortingOptions[currentSorting]}</h1>
                 </div>
 
                 <div className="flex">
@@ -112,9 +112,9 @@ function Foods() {
                                     {items.map((val, key) => {
                                         return (
                                             <tr key={key} className="bg-off-white">
-                                                <td className="px-4 py-2 text-left">{val.name}</td>
-                                                <td className="px-12 py-2 text-right">{val.expiry}</td>
-                                                <td className="px-0 text-right text-chocolate-cosmos" onClick={ () => singleDelete(val.id) }>
+                                                <td className="px-4 py-2 text-left text-maroon text-lg">{val.name}</td>
+                                                <td className="px-12 py-2 text-right text-maroon text-lg">{val.expiry}</td>
+                                                <td className="px-0 text-right" onClick={ () => singleDelete(val.id) }>
                                                     <img src="../src/assets/trash.png" width={20} height={20} className = "hover:cursor-pointer"/>
 
                                                 </td>
@@ -130,12 +130,12 @@ function Foods() {
                         {/* Sort By Section */}
                         <div className="w-1/4 pl-4">
                             <div className="bg-off-white rounded-lg shadow p-4">
-                                <h2 className="text-center text-maroon mb-2 font-semibold">Sort By</h2>
+                                <h2 className="text-center text-maroon mb-2 font-semibold text-xl">Sort By</h2>
                                 <ul className="text-maroon space-y-2 text-sm">
                                     {sortingOptions.map((val, key) => {
                                         return (
                                             <li key={key} className="bg-off-white">
-                                                <h2 className="px-4 py-2 text-left cursor-pointer hover:underline" onClick={() => changeSorting(key)}>{val}</h2>
+                                                <h2 className="px-4 py-2 text-left cursor-pointer hover:underline text-lg" onClick={() => changeSorting(key)}>{val}</h2>
                                             </li>
                                         );
                                     })}                                    
