@@ -7,8 +7,10 @@ function Header(){
     
     return(
         <header className = "sticky top-0 bg-hot-pink shadow-md py-6 w-full flex justify-center items-center z-100">
-            <button onClick={()=>navigate('/')}>
-                <h1 className="justify-center items-center text-off-white">LemonAid</h1>
+            <button onClick={()=>navigate('/')} className="items-center">
+                <img src = "../src/assets/logo pic.png" className="flex justify-center items-center text-off-white h-12" />
+                <span className="text-off-white">LemonAid</span>
+                
             </button>
         </header>
     );
