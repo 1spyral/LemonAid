@@ -47,7 +47,8 @@ class Server:
     def setup(self) -> None:
         """Set up data.json"""
         self.data = {
-            "items": {}
+            "items": {},
+            "recipes": []
         }
         print("data.json set up")
         self.write_data()
@@ -225,7 +226,13 @@ class Server:
         # Return response
         return format_response(response, 200)
 
-    def generate_recipes(self, count: int):
+    def get_recipes(self):
+
+        if self.data["recipes"] == []:
+            return self.generate_recipes()
+        return format_response(self.data["recipes"], 200)
+
+    def generate_recipes(self):
         """
         Generate a number of recipes using food in the pantry
 
@@ -258,12 +265,12 @@ class Server:
             "status": "success"
         }
         pantry = list(map(lambda x: self.data["items"][x]["name"], self.data["items"]))
-        for _ in range(count):
+        for _ in range(3):
             recipe_generated = generate_recipe(pantry)
             image_url = generate_recipe_image(recipe_generated)
             recipe_generated["image"] = image_url
-            response["recipes"].append(generate_recipe(pantry))
-        
+            response["recipes"].append(recipe_generated)
+        self.data["recipes"] = response["recipes"]
         return format_response(response, 200)
 
 
