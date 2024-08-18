@@ -38,20 +38,20 @@ const RecipeList = () => {
 
   return (
     <>
-        <ul className="w-screen">
-            {recipes.map((val, key) => {
-              return (
-                <RecipeListItem
-                key={key}
-                imageURL={val.image}
-                name={val.name}
-                />
-              );
-            })}
-            <button onClick={() => regenerateRecipes()} className="items-center p-4 ml-5 mt-2 rounded-lg bg-raspberry">
-                More Recipes
-            </button>
-        </ul>
+      <ul className="w-screen">
+          {recipes.map((val, key) => {
+            return (
+              <RecipeListItem
+              key={key}
+              imageURL={val.image}
+              name={val.name}
+              />
+            );
+          })}
+          <button onClick={() => regenerateRecipes()} className="items-center p-4 ml-5 mt-2 rounded-lg bg-raspberry">
+              More Recipes
+          </button>
+      </ul>
     </>
   );
 };
