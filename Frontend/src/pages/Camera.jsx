@@ -36,13 +36,15 @@ function Camera() {
                     <img src = "../src/assets/back button2.png" width={20} height={20}/>
                 </button>
             </div>
+            <div className="flex justify-center duration-200">
+                {captureStatus && (
+                    <div>
+                        <AddFoodAlert captureStatus={captureStatus} onDismiss={handleAlertDismiss} className="absolute"/>
+                    </div>
+                )}
+            </div>
             <div className="flex justify-center">
-            <WebcamComponent onCaptureComplete={handleCaptureComplete} />
-            {captureStatus && (
-                <div>
-                    <AddFoodAlert captureStatus={captureStatus} onDismiss={handleAlertDismiss} className="absolute"/>
-                </div>
-            )}
+                <WebcamComponent onCaptureComplete={handleCaptureComplete} />
             </div>
         </div>
     );
