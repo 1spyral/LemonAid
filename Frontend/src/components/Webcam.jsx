@@ -1,8 +1,13 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Webcam from "react-webcam";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const WebcamComponent = ({ onCapture, onCaptureComplete}) => {
     const webcamRef = useRef(null);
+
+    const [startDate, setStartDate] = useState(0);
 
     const capturePhoto = () => {
         const imageSrc = webcamRef.current.getScreenshot({width:1024, height:512});
@@ -12,7 +17,8 @@ const WebcamComponent = ({ onCapture, onCaptureComplete}) => {
         console.log(imageSrc);
 
         const foodName = document.getElementById("food-name-input").value;
-        const foodExpiry = document.getElementById("food-expiry-input").value;
+        const foodExpiry = startDate.toISOString().split('T')[0];
+        console.log(foodExpiry)
 
         const data = new FormData();
 
@@ -46,11 +52,19 @@ const WebcamComponent = ({ onCapture, onCaptureComplete}) => {
       <form id='food-info-form' className='gap-3'>
         <div>
             <label className='block'>Food Name</label>
-            <input type="text" id="food-name-input" className="border-2"/>
+            <input type="text" id="food-name-input" className="border-2 w-48 h-8" placeholder="Enter the food name" />
         </div>
         <div>
             <label className='block'>Expiry Date (yyyy-mm-dd)</label>
-            <input type="text" id="food-expiry-input" className="border-2"/>
+            <DatePicker
+              showIcon
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              minDate={new Date()}
+              isClearable
+              className="border-2 w-48 h-8"
+              placeholderText="Select a date"
+            />
         </div>
       </form>
       <button
