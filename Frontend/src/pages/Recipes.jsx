@@ -40,7 +40,7 @@ function Recipes() {
                     const instructions = val.instructions;
                     return (
                         <div className="flex">
-                            <div className="w-1/3 h-3/4 p-10 m-5 rounded-3xl bg-raspberry">
+                            <div className="w-1/3 h-3/4 p-10 m-5 rounded-3xl bg-raspberry hover:bg-raspberry">
                                 <img src={imageUrl} alt="Image of Food" className="rounded-2xl"/>
                                 <ul className="mt-5 ml-5 list-disc text-2xl text-baby-powder font-delius">
                                     {Object.entries(ingredients).map(([ingredient, quantity], i) => (

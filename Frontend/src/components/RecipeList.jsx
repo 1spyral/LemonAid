@@ -48,7 +48,7 @@ const RecipeList = () => {
                 />
               );
             })}
-            <button onClick={() => regenerateRecipes()} className="items-center w-56 h-24 p-4 ml-5 mt-2 rounded-lg bg-hot-pink hover:bg-salmon font-lilita text-off-white">
+            <button onClick={() => regenerateRecipes()} className="items-center w-56 h-24 p-4 ml-5 mt-2 rounded-lg bg-hot-pink font-lilita text-off-white">
                 More Recipes
             </button>
         </ul>

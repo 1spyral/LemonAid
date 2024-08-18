@@ -42,7 +42,7 @@ const WebcamComponent = ({ onCapture, onCaptureComplete}) => {
     };
 
   return (
-    <div className="items-center relative z-0">
+    <div className="items-center flex-col flex z-0">
       <Webcam
         audio={false}
         height={504}
@@ -51,29 +51,29 @@ const WebcamComponent = ({ onCapture, onCaptureComplete}) => {
         className="mt-2 mb-5 transform scale-x-[-1] rounded-3xl"
         ref={webcamRef}
       />
-      <form id='food-info-form' className='gap-3'>
-        <div className="my-5">
-            <label className='block'>Food Name</label>
-            <input type="text" id="food-name-input" className="border-2 w-48 h-8 p-2" placeholder="Enter the food name" />
+      <form id='food-info-form' className='gap-3 flex items-center place-content-evenly'>
+        <div className="my-5 mx-20">
+            <label className='block font-delius ml-14 '>Food Name</label>
+            <input type="text" id="food-name-input" className="border-2 w-48 h-8 p-4 rounded-md" placeholder="Enter the food name" />
         </div>
-        <div className="my-5">
-            <label className='block'>Expiry Date (yyyy-mm-dd)</label>
+        <div className="my-5 mx-20">
+            <label className='block font-delius place-content-evenly '>Expiry Date (yyyy-mm-dd)</label>
             <DatePicker
               showIcon
               selected={startDate}
               onChange={(date) => setStartDate(date)}
               minDate={new Date()}
               isClearable
-              className="border-2 w-48 h-8 border-maroon p-2 pl-5"
+              className="border-2 w-48 h-8  p-4 pl-5 px-10 rounded-md "
               placeholderText="Select a date"
             />
         </div>
       </form>
       <button
         onClick={capturePhoto}
-        className="relative left-1/2 transform -translate-x-1/2 w-1/3 h-10 rounded-xl bg-raspberry my-5"
+        className="relative w-1/12 mb-5"
       >
-        Capture Photo
+        <img src="../src/assets/camera-button.png" className="rounded-2xl"/>
       </button>
     </div>
   );

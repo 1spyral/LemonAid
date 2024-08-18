@@ -2,7 +2,7 @@ VALID_FILE_TYPES = {'png', 'jpg', 'jpeg'}
 PHOTO_PATH = "imgs/"
 ID_CAP = 999999999
 GPT_MODEL = "gpt-4o"
-GPT_MAX_TOKENS = 300
+GPT_MAX_TOKENS = 600
 GPT_SCAN_PROMPT = """
 The current date is [date].
             

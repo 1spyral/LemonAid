@@ -31,7 +31,7 @@ function Camera() {
     }, [captureStatus]);
 
     return(
-        <div>
+        <div className="bg-baby-powder">
             <Header />
             <div className="flex justify-left items-center ml-10 mt-10">
                 <button onClick={() => navigate('/')}>

@@ -11,7 +11,7 @@ export const AddFoodAlert = ({ onDismiss }) => {
         <Alert color="success">
         <AlertContainer>
             <AlertIcon />
-            <AlertTitle>Item Added Successfully!</AlertTitle>
+            <AlertTitle className="font-delius">Item Added Successfully</AlertTitle>
         </AlertContainer>
         <AlertContainer>
             <AlertDismiss onClick={onDismiss}/>
