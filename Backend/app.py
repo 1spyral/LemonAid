@@ -157,7 +157,7 @@ def view_all_items():
 def get_recipes():
 
     """
-    Get the 3 saved recipes that were generated
+    Get the 2 saved recipes that were generated
 
     Request:
     {
@@ -190,7 +190,7 @@ def get_recipes():
 def generate_recipes():
 
     """
-    Generate 3 recipes using food in the pantry
+    Generate 2 recipes using food in the pantry
 
     Request:
     {

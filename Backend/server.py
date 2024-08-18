@@ -234,7 +234,7 @@ class Server:
 
     def generate_recipes(self):
         """
-        Generate a number of recipes using food in the pantry
+        Generate 2 recipes using food in the pantry
 
         Request:
         {
@@ -265,7 +265,7 @@ class Server:
             "status": "success"
         }
         pantry = list(map(lambda x: self.data["items"][x]["name"], self.data["items"]))
-        for _ in range(3):
+        for _ in range(2):
             recipe_generated = generate_recipe(pantry)
             image_url = generate_recipe_image(recipe_generated)
             recipe_generated["image"] = image_url
