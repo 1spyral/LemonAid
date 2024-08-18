@@ -48,7 +48,7 @@ const RecipeList = () => {
                 />
               );
             })}
-            <button onClick={() => regenerateRecipes()} className="items-center p-4 ml-5 mt-2 rounded-lg bg-bittersweet">
+            <button onClick={() => regenerateRecipes()} className="items-center p-4 ml-5 mt-2 rounded-lg bg-raspberry">
                 More Recipes
             </button>
         </ul>
