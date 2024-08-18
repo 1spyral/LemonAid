@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const WebcamComponent = ({ onCapture, onCaptureComplete}) => {
     const webcamRef = useRef(null);
 
-    const [startDate, setStartDate] = useState(0);
+    const [startDate, setStartDate] = useState(null);
 
     const capturePhoto = () => {
         const imageSrc = webcamRef.current.getScreenshot({width:1024, height:512});
@@ -17,8 +17,10 @@ const WebcamComponent = ({ onCapture, onCaptureComplete}) => {
         console.log(imageSrc);
 
         const foodName = document.getElementById("food-name-input").value;
-        const foodExpiry = startDate.toISOString().split('T')[0];
-        console.log(foodExpiry)
+        let foodExpiry = "";
+        if (startDate != null) {
+          foodExpiry = startDate.toISOString().split('T')[0];
+        }
 
         const data = new FormData();
 
