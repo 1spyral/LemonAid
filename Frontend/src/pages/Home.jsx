@@ -8,8 +8,8 @@ function Home() {
     return (
         <>
             <Header />
-            <div className="flex w-4/5 m-auto justify-around">
-                <div className="bg-saffron w-2/5 h-4/5 p-4 m-8 rounded-xl text-xl">
+            <div className="flex w-5/6 m-auto justify-around">
+                <div className="bg-saffron w-3/5 h-4/5 p-4 m-8 rounded-xl text-xl">
                     <FoodList />
                 </div>
                 <div className="w-2/5 h-4/5 p-4">
