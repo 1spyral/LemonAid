@@ -26,11 +26,15 @@ const FoodList = () => {
 
   return (
     <>
-      <button onClick={() => navigate('../food-inventory')}>
-          <h1 className="flex w-auto h-auto m-3 p-2 text-2xl">
-              Expiring Soon
-          </h1>
-      </button>
+      
+      <div className="flex justify-between w-full h-auto m-3 p-2 text-2xl">
+        <span className="text-left">Expiring Soon</span>
+        <button onClick={() => navigate('../food-inventory')}>
+          <span className="text-right ml-auto mr-4">View All</span>
+        </button>
+      </div>
+      
+
       <ul className="overflow-y-auto">
         {items.slice(0, 10).map((val, key) => {
           return (
