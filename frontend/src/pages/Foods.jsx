@@ -94,11 +94,11 @@ function Foods() {
     return (
         <div>
             <Header />
-        <div className="bg-off-white min-h-screen flex justify-center">
+        <div className="bg-off-white flex justify-center">
             <div className="bg-yellow-orange rounded-lg shadow-lg p-8 w-5/6 my-12">
                 <div className="flex justify-left items-center mb-4">
                     <button onClick={() => navigate('/')}>
-                        <img src = "../src/assets/back button.png" width={30} height={30}/>
+                        <img src = "../src/assets/back button.png" width={30} height={30} className="mr-10"/>
                     </button>
                     <h1 className="text-off-white text-xl font-semibold">{sortingOptions[currentSorting]}</h1>
                 </div>
@@ -107,8 +107,8 @@ function Foods() {
                     {/* Table Section */}
                     <div className="w-3/4">
                         <div className="bg-off-white w-full flex justify-center items-center rounded-lg">
-                            <table className="w-full my-2 border-yellow-orange border-separate divide-solid divide-y-8">
-                                <tbody className="max-h-[300px] overflow-y-auto divide-y-8 divide-yellow-orange divide-solid">
+                            <table className="w-full border-yellow-orange border-separate divide-solid my-2">
+                                <tbody className="max-h-[300px] overflow-y-auto divide-yellow-orange divide-solid">
                                     {items.map((val, key) => {
                                         return (
                                             <tr key={key} className="bg-off-white">
