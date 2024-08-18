@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import Webcam from "react-webcam";
 import DatePicker from "react-datepicker";
+import Popup from 'reactjs-popup';
+
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -69,12 +71,34 @@ const WebcamComponent = ({ onCapture, onCaptureComplete}) => {
             />
         </div>
       </form>
-      <button
-        onClick={capturePhoto}
-        className="relative w-1/12 mb-5"
+      
+      <Popup 
+        trigger={
+          <button onClick={capturePhoto} className="relative w-1/12 mb-5">
+            <img src="../src/assets/camera-button.png" className="rounded-2xl"/>
+          </button>
+        } 
+        modal 
+        nested
       >
-        <img src="../src/assets/camera-button.png" className="rounded-2xl"/>
-      </button>
+        {close => (
+          <div className='modal bg-hot-pink p-3 rounded-lg items-center px-5'>
+            <div className='content flex text-off-white w-full justify-center font-delius'>
+              Image Taken Successfully
+            </div>
+            
+            <div className='flex justify-center mt-2'>
+              <button 
+                onClick={() => close()} 
+                className="text-sm text-maroon hover:text-yellow-orange"
+              >
+                x
+              </button>
+            </div>
+          </div>
+        )}
+      </Popup>
+
     </div>
   );
 };
