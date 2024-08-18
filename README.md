@@ -1,5 +1,8 @@
 # LemonAid
 ![image](https://github.com/user-attachments/assets/7d5314af-1991-4481-9aae-99f049da01c8)
+Clean your fridge, Save money, Help the environment! 🫨🫨🫨 LemonAid tracks your food items for delicious recipes before they spoil and rot! Scan your groceries, and we'll remind you to use them up!
+
+Created by [`@claireg0`](https://github.com/claireg0), [`@will2dai4`](https://github.com/will2dai4), [`@Williamwu277`](https://github.com/Williamwu277), [`@1spyral`](https://github.com/1spyral)
 
 ## How to run
 Server: navigate to `Backend/` folder. Execute `flask run` or `python3 -m flask run`.
