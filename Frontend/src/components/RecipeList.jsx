@@ -1,23 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import RecipeListItem from './RecipeListItem';
 
 const RecipeList = () => {
-  const [items, setItems] = useState([
-    { id: 1, imageURL: '../src/assets/scan icon.png', name: 'Example1' },
-    { id: 2, imageURL: '../src/assets/scan icon.png', name: 'Example2' },
-    { id: 3, imageURL: '../src/assets/scan icon.png', name: 'Example3' }
-  ]);
+  const navigate = useNavigate();
+  const [recipes, setRecipes] = useState([])
+
+  useEffect(()=>{
+    fetch(`http://127.0.0.1:5000/api/get_recipes`, {
+        method: "GET", 
+    }).then((response)=>{
+        console.log(response);
+        return response.json();
+    }).then((value)=>{
+        const recipesArray = Object.values(value["recipes"]); 
+        console.log(recipesArray);
+        setRecipes(recipesArray);
+    }).catch((error)=>{
+        console.error("Fetch error: ", error);
+    });
+  }, []);
+
+  const regenerateRecipes = () => {
+    fetch(`http://127.0.0.1:5000/api/generate_recipes`, {
+        method: "GET", 
+    }).then((response)=>{
+        console.log(response);
+        return response.json();
+    }).then((value)=>{
+        const recipesArray = Object.values(value["recipes"]); 
+        console.log(recipesArray);
+        setRecipes(recipesArray);
+    }).catch((error)=>{
+        console.error("Fetch error: ", error);
+    });
+  }
 
   return (
     <>
         <ul className="w-screen">
-            {items.map((item) => (
+            {recipes.map((val, key) => {
+              return (
                 <RecipeListItem
-                key={item.id}
-                imageURL={item.imageURL}
-                name={item.name}
+                key={key}
+                imageURL={val.image}
+                name={val.name}
                 />
-            ))}
+              );
+            })}
+            <button onClick={() => regenerateRecipes()} className="items-center p-4 ml-5 mt-2 rounded-lg bg-bittersweet">
+                More Recipes
+            </button>
         </ul>
     </>
   );

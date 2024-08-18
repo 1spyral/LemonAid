@@ -16,7 +16,7 @@ function Home() {
                     <div className="flex bg-raspberry h-4/5 m-5 rounded-xl text-xl">
                         <AddInventoryButton />
                     </div>
-                    <div className="flex h-4/5 rounded-xl text-xl">
+                    <div className="flex h-screen rounded-xl text-xl">
                         <RecipeList />
                     </div>
                 </div>

@@ -227,14 +227,21 @@ class Server:
         return format_response(response, 200)
 
     def get_recipes(self):
-
+        
         if self.data["recipes"] == []:
             return self.generate_recipes()
-        return format_response(self.data["recipes"], 200)
+        
+        response = {
+            "recipes": [],
+            "status": "status"
+        }
+        response["recipes"] = self.data["recipes"]
+        
+        return format_response(response, 200)
 
     def generate_recipes(self):
         """
-        Generate 2 recipes using food in the pantry
+        Generate 1 recipes using food in the pantry
 
         Request:
         {
@@ -265,11 +272,10 @@ class Server:
             "status": "success"
         }
         pantry = list(map(lambda x: self.data["items"][x]["name"], self.data["items"]))
-        for _ in range(2):
-            recipe_generated = generate_recipe(pantry)
-            image_url = generate_recipe_image(recipe_generated)
-            recipe_generated["image"] = image_url
-            response["recipes"].append(recipe_generated)
+        recipe_generated = generate_recipe(pantry)
+        image_url = generate_recipe_image(recipe_generated)
+        recipe_generated["image"] = image_url
+        response["recipes"].append(recipe_generated)
         self.data["recipes"] = response["recipes"]
         return format_response(response, 200)
 
