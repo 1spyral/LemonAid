@@ -9,6 +9,24 @@ const FoodList = () => {
   const [items, setItems] = useState([]);
   const currentSorting = "Expiry Date (Earliest)";
 
+  const singleDelete = (newid) => {
+    fetch(`http://127.0.0.1:5000/api/delete_item?id=${newid}`, {
+        method: "DELETE",
+    })
+    .then((response) => {
+        if (response.ok) {
+            const newArr = items.filter((item) => item.id !== newid);
+            setItems(newArr);
+        } else {
+            console.error("Failed to delete item");
+        }
+    })
+    .catch((error) => {
+        console.error("Fetch error: ", error);
+    });
+};
+
+
   useEffect(()=>{
     fetch(`http://127.0.0.1:5000/api/view_all_items?sort_method=0`, {
         method: "GET", 
@@ -40,7 +58,11 @@ const FoodList = () => {
           return (
               <li key={key} className="flex bg-baby-powder justify-between m-2 rounded-lg">
                   <span className="px-4 py-2 text-left">{val.name}</span>
-                  <span className="px-4 py-2 text-right">{val.expiry}</span>
+                  <span className="px-10 py-2 text-right ml-auto">{val.expiry}</span>
+                  <div className="px-0 text-right text-chocolate-cosmos" onClick={ () => singleDelete(val.id) }>
+                    <img src="../src/assets/trash.png" width={20} height={20} className = "hover:cursor-pointer mt-3 mr-3"/>
+                  </div>
+
               </li>
           );
         })}
